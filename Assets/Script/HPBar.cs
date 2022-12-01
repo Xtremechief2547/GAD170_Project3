@@ -5,10 +5,15 @@ using UnityEngine.UI;
 
 public class HPBar : MonoBehaviour
 {
-  public Slider hpSlider;
 
-  public void SetValue(float hpvalue) 
-    {
+    public Slider hpSlider;
+
+    public void InitBar(float maxValue) {
+        hpSlider.maxValue = maxValue;
+        hpSlider.value = maxValue;
+    }
+
+    public void SetValue(float hpvalue) {
         hpSlider.value = hpvalue;
     }
 

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class spikeHazard : MonoBehaviour
 {
+    
+    public GameObject Player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +17,14 @@ public class spikeHazard : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.name == "Player") 
+        {
+            Destroy(Player.gameObject);
+            print("You died via spike" + collision.gameObject.tag);
+        }
     }
 }
