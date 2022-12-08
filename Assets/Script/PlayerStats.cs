@@ -17,6 +17,7 @@ public class PlayerStats : MonoBehaviour
     public bool pit = false;
 
     // Start is called before the first frame update
+    // Attempting to set up respawn position
     void Start()
     {
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
@@ -24,11 +25,15 @@ public class PlayerStats : MonoBehaviour
     }
 
     // respawn variable
-    public void PlayerTakeDamage(float damage)
+    public void OnTriggerEnter(Collider collider)
     {
-        if(hpValue <= 0) {
+        if(collider.gameObject.tag == "Respawn")
+        {
+            if(hpValue <= 0) 
+            {
             hpValue = hpMax;
-            playerPos.position = new Vector3(spawnPoint.position.x, spawnPoint.position.y, spawnPoint.position.z);
+            playerPos.position = new Vector3(spawnPoint.position.x, spawnPoint.position.y, spawnPoint.position.z); 
+            }
         }
     }
 
