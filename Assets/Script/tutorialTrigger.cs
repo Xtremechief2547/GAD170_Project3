@@ -9,16 +9,4 @@ public class tutorialTrigger : MonoBehaviour
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter(Collider collision)
-    {
-        print("welcome, follow the light");
-        print("'a,w,s,d' to move and 'space' to jump");
-    }
 }

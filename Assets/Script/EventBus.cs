@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EventBus : MonoBehaviour {
 
@@ -9,11 +10,11 @@ public class EventBus : MonoBehaviour {
 
     public static EventBus Current { get { return _current; } }
 
-    private int lives = 3;
-
     public event Action lightsGoOn;
     public event Action lightsGoOff;
+    public GameObject player;
 
+    float newHp;
 
     private void Awake()
     {
@@ -22,6 +23,7 @@ public class EventBus : MonoBehaviour {
             Destroy(this.gameObject);
         } else {
             _current = this;
+
             DontDestroyOnLoad(gameObject);
         }
     }
@@ -36,13 +38,21 @@ public class EventBus : MonoBehaviour {
         lightsGoOff();
     }
 
-    //Public function that returns the lives
-    public int ReturnLives() {
-        return lives;
+    public void SetHealth(float playerHealth)
+    {
+        newHp = playerHealth;
     }
 
-    //Public function that takes one life away
-    public void RemoveLife() {
-        lives--;
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public float ReturnHealth()
+    {
+        return newHp;
+    }
+    
+    
+
 }

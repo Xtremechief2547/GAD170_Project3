@@ -5,23 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    //public void button()
-    //{
-        //if(Input.GetKeyDown("k"))
-
-    //}
+    public bool endgame = false;
+    public bool pit = false;
+    public GameObject gameManager;
+    public HPBar hpBar;
+    public float playerHealth = 100f;
 
     public void OnTriggerEnter(Collider collider)
     {
@@ -33,6 +21,36 @@ public class PlayerInteraction : MonoBehaviour
         if(collider.gameObject.name =="BridgeTrigger")
         {
            transform.position = new Vector3(0.1419716f, 0.3571978f, 72.11f);
+        }
+
+        if(collider.gameObject.name == "PyramidTrigger")
+        {
+            endgame = true;
+        }
+    
+        if(collider.gameObject.tag == "Respawn")
+        {
+            EventBus.Current.ReloadScene();
+        }
+    
+    }
+
+    public void OnDestroy() 
+    {
+        EventBus.Current.SetHealth(playerHealth);
+    }
+
+    public void Start() 
+    {
+        playerHealth = EventBus.Current.ReturnHealth();
+        
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown("k") && endgame == true)
+        {
+            gameManager.GetComponent<GameManager>().PlayerVictory();
         }
     }
 }

@@ -1,11 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
+
 public class GameManager : MonoBehaviour
 {
-    public void ReloadScene()
+    public GameObject victoryText;
+    public GameObject player;
+
+    public void Start()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        print("welcome, follow the light");
+        print("'a,w,s,d' to move and 'space' to jump");
+    }
+
+    public void PlayerVictory()
+    {
+        victoryText.SetActive(true);
+        player.GetComponent<PlayerMovement>().enabled = false;
+
     }
 }
