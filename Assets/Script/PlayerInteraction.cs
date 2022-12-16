@@ -10,6 +10,7 @@ public class PlayerInteraction : MonoBehaviour
     public GameObject gameManager;
     public HPBar hpBar;
     public float playerHealth = 100f;
+    private bool buttonpress = false;
 
     public void OnTriggerEnter(Collider collider)
     {
@@ -20,7 +21,8 @@ public class PlayerInteraction : MonoBehaviour
 
         if(collider.gameObject.name =="BridgeTrigger")
         {
-           transform.position = new Vector3(0.1419716f, 0.3571978f, 72.11f);
+            buttonpress = true;
+            
         }
 
         if(collider.gameObject.name == "PyramidTrigger")
@@ -32,6 +34,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             EventBus.Current.ReloadScene();
         }
+
     
     }
 
@@ -52,5 +55,18 @@ public class PlayerInteraction : MonoBehaviour
         {
             gameManager.GetComponent<GameManager>().PlayerVictory();
         }
+
+        if(Input.GetKeyDown("k") && buttonpress == true)
+        {
+            //transform.position = new Vector3(0.1419716f, 0.3571978f, 72.11f);
+            gameManager.GetComponent<GameManager>().BridgeInteract();
+        }
+
+        // this will cause a update script feature problem
+        //if(collider.gameObject.tag == "Spike")
+        //{
+           //playerHealth -= 25;
+        //}
+
     }
 }

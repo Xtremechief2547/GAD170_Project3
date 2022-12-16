@@ -7,6 +7,7 @@ TagManager:
   - Void Hazard
   - Character
   - Location Name
+  - Spike
   layers:
   - Default
   - TransparentFX
